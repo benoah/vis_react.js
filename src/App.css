@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+}
+
+.App {
+  text-align: center;
+  padding: 20px;
+  margin: auto;
+  max-width: 660px;
+
+  border-radius: 15px; /* Optional: for rounded corners */
+  background-color: #fff; /* Background inside the frame */
+  /* Optional: shadow for depth */
+}
+
+.App h1 {
+  color: #d60000; /* Adjust color as needed */
+}
