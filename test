@@ -1,0 +1,84 @@
+import React, { useEffect, useRef, useState } from "react";
+import { Network } from "vis-network";
+import { Title, Text, Button, Modal, TextInput } from '@mantine/core'; // Import necessary components from Mantine
+
+const NetworkGraph = () => {
+  const networkContainer = useRef(null);
+  const [showModal, setShowModal] = useState(false);
+  const [modalType, setModalType] = useState(""); // "add" or "edit"
+  const [nodeData, setNodeData] = useState({ id: null, label: "" });
+  const [networkInstance, setNetworkInstance] = useState(null);
+
+  useEffect(() => {
+    const data = { nodes: new Network.DataSet(nodes), edges: new Network.DataSet(edges) };
+
+    const options = {
+      // Your existing options...
+      manipulation: {
+        enabled: true,
+        addNode: (data, callback) => {
+          openModal("add", data, callback);
+        },
+        editNode: (data, callback) => {
+          openModal("edit", data, callback);
+        },
+        // addEdge and other options as needed...
+      },
+    };
+
+    const network = new Network(networkContainer.current, data, options);
+    setNetworkInstance(network);
+  }, []);
+
+  const openModal = (type, data, callback) => {
+    setModalType(type);
+    setNodeData({ id: data.id, label: data.label });
+    setShowModal(true);
+
+    // Save or Cancel actions
+    const saveAction = () => {
+      if (modalType === "add") {
+        callback({ id: Date.now(), label: nodeData.label });
+      } else if (modalType === "edit") {
+        callback(nodeData);
+      }
+      setShowModal(false);
+    };
+
+    const cancelAction = () => {
+      callback(null);
+      setShowModal(false);
+    };
+
+    // Override the default save/cancel functions if needed
+    // This example assumes you will trigger saveAction and cancelAction based on your modal's buttons
+  };
+
+  const handleLabelChange = (event) => {
+    setNodeData({ ...nodeData, label: event.target.value });
+  };
+
+  return (
+    <div className="network-graph-container">
+      <Title order={1}>Chicago Bulls Team Network - 1995-96</Title>
+      <div ref={networkContainer} className="network-graph"></div>
+      
+      {/* Modal for Adding/Editing Nodes */}
+      <Modal
+        opened={showModal}
+        onClose={() => setShowModal(false)}
+        title={`${modalType === "add" ? "Add" : "Edit"} Node`}
+      >
+        <TextInput
+          label="Label"
+          value={nodeData.label}
+          onChange={handleLabelChange}
+        />
+        <Button onClick={/* function to handle save action */}>Save</Button>
+        <Button onClick={/* function to handle cancel action */}>Cancel</Button>
+      </Modal>
+    </div>
+  );
+};
+
+export default NetworkGraph;

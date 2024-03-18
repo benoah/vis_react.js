@@ -1,16 +1,18 @@
 import React from 'react';
 import './App.css';
-import NetworkGraph from "./networkgraph"
-import { MantineProvider } from '@mantine/core';
-import { Title } from '@mantine/core';
+import NetworkGraph from "./component /networkgraph"
+import { Container, MantineProvider } from '@mantine/core';
+import Test from "./test.js"
+
 
 function App() {
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS>
-       <div className="App">
-       <Title order={1}>Chicago Bulls Team Network - 1995-96 </Title>
+      <Test/>
+      <Container>
       <NetworkGraph />
-       </div>
+      </Container>
+    
       </MantineProvider>
   );
 }

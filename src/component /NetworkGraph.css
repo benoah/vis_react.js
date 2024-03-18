@@ -1,0 +1,33 @@
+.network-graph-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 20px; 
+  }
+  
+  .graph-title {
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold; 
+    color: #333;
+  }
+  
+  .network-graph {
+    width: 100%;
+    height: 600px; 
+    border: 1px solid #ddd; 
+  }
+  
+  .tooltip {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    z-index: 100;
+    pointer-events: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    font-size: 14px; 
+    color: #333;
+  }
+  
